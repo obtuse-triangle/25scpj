@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>과학프로젝트</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        corePlugins: {
+          preflight: false,
+        },
+      };
+    </script>
+    <link rel="stylesheet" href="global.css" />
+    <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@latest/css/pico.min.css" />
+    <script>
+      const loadingScreen = document.querySelector("section");
+      const currentUser = window.localStorage.getItem("username");
+
+      if (currentUser) {
+        window.location.href = "home.html";
+      }
+      document.addEventListener("DOMContentLoaded", () => {
+        const form = document.querySelector("form");
+        form.addEventListener("submit", (event) => {
+          event.preventDefault();
+          const isRequireGrantPermission =
+            typeof DeviceMotionEvent !== "undefined" &&
+            typeof DeviceMotionEvent.requestPermission === "function";
+          if (!isRequireGrantPermission) {
+            window.localStorage.setItem("username", form.username.value);
+            window.location.href = "home.html";
+            return;
+          }
+          window.DeviceMotionEvent.requestPermission().then((state) => {
+            if (state === "granted") {
+              window.localStorage.setItem("username", form.username.value);
+              window.location.href = "home.html";
+            } else {
+              alert("Permission denied. Please enable motion access.");
+              console.log(state);
+            }
+          });
+        });
+      });
+    </script>
+  </head>
+  <body class="container min-h-screen flex flex-col justify-center items-center">
+    <main class="m-auto">
+      <h2>로그인</h2>
+      <form action="home.html" method="get">
+        <label for="username">사용자 이름:</label>
+        <input type="text" id="username" name="username" required />
+        <button type="submit">로그인</button>
+      </form>
+    </main>
+  </body>
+</html>

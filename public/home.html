@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Device Motion Energy Test</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        corePlugins: {
+          preflight: false,
+        },
+      };
+    </script>
+    <link rel="stylesheet" href="global.css" />
+    <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@latest/css/pico.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css"
+    />
+  </head>
+  <body class="container min-h-screen flex flex-col justify-center items-center">
+    <section
+      class="fixed top-0 left-0 w-screen h-screen flex flex-col justify-center items-center bg-black z-50"
+    >
+      <div class="animate-spin"><i class="ti ti-loader-2 text-2xl"></i></div>
+      <div class="text-white">Loading...</div>
+      <script>
+        // if loading is not finished in 5 seconds, redirect to home.html
+        
+      </script>
+    </section>
+    <script src="home.js"></script>
+    <main>
+      <h1>Device Motion Test</h1>
+      <p>기기를 움직여 보세요!</p>
+      <textarea id="motionData" cols="80" rows="30"></textarea>
+    </main>
+  </body>
+</html>
